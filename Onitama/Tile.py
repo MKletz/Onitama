@@ -13,6 +13,12 @@ class Tile():
         else:
             return None
     
+    def get_occupying_is_master(self):
+        if self.occupying_piece != None:
+            return self.occupying_piece.is_master
+        else:
+            return None
+
     def move_from(self):
         self.occupied = False
         self.occupying_piece = None
@@ -20,6 +26,8 @@ class Tile():
     def move_to(self,piece,from_tile):
         if self.get_occupying_color() == piece.color:
             raise ValueError('You already have a piece on that tile!')
+        elif self.occupied and self.get_occupying_color() != piece.color:
+            self.occupying_piece.eliminate()
         else:
             self.occupied = True
             self.occupying_piece = piece
