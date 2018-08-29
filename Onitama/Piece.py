@@ -1,8 +1,8 @@
 class Piece():
     
-    def __init__(self):
-        self.is_master = False
-        self.color = None
+    def __init__(self,color,is_master):
+        self.is_master = is_master
+        self.color = color
 
     def eliminate(self):
         if self.is_master:

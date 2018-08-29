@@ -1,10 +1,13 @@
 class Tile():
 
-    def __init__(self):
-        self.occupied = False
-        self.occupying_piece = None
-        self.x = None
-        self.y = None
+    def __init__(self,x,y,piece):
+        self.occupying_piece = piece
+        if self.occupying_piece != None:
+            self.occupied = True
+        else:
+            self.occupied = False
+        self.x = x
+        self.y = y
         self.image = "Default.png"
 
     def get_occupying_color(self):
@@ -23,12 +26,16 @@ class Tile():
         self.occupied = False
         self.occupying_piece = None
 
-    def move_to(self,piece,from_tile):
-        if self.get_occupying_color() == piece.color:
+    def move_to(self,from_tile):
+        if self.get_occupying_color() == from_tile.get_occupying_color():
             raise ValueError('You already have a piece on that tile!')
-        elif self.occupied and self.get_occupying_color() != piece.color:
+        elif self.occupied and self.get_occupying_color() != from_tile.get_occupying_color():
             self.occupying_piece.eliminate()
         else:
             self.occupied = True
-            self.occupying_piece = piece
+            self.occupying_piece = from_tile.occupying_piece
             from_tile.move_from()
+
+    def set_starting_tile(self,piece):
+        self.occupied = True
+        self.occupying_piece = piece
