@@ -18,9 +18,9 @@ class Tile():
         self.occupying_piece = None
 
     def move_to(self,piece,from_tile):
-        if self.get_occupying_color == piece.color:
+        if self.get_occupying_color() == piece.color:
             raise ValueError('You already have a piece on that tile!')
         else:
             self.occupied = True
             self.occupying_piece = piece
-            from_tile.move_from
+            from_tile.move_from()
