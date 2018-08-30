@@ -9,3 +9,4 @@ class Piece():
             print("you're dead Jim.")
         else:
             print("I'm dead Jim.")
+            del(self)
